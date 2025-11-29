@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: base-project
+  jpa:
+    hibernate.ddl-auto: none
+    generate-ddl: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.OracleDialect
+        
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/XE
+    username: system
+    password: mysecurepassword
+    driver-class-name: oracle.jdbc.OracleDriver
+
+  redis:
+    host: localhost
+    port: 6379
+
+  data:
+    mongodb:
+      uri: mongodb://admin:adminPassword@localhost:27017/admin?authSource=admin
+      database: admin
+
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+
+
+
+system:
+  debug: false
+  debugLog: true
+  debugLogController: true
+  debugLogService: true
+  debugLogRepository: true
