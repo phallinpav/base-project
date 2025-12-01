@@ -1,6 +1,7 @@
 package com.sample.base_project.core.model;
 
 import com.sample.base_project.common.base.BaseEntity;
+import com.sample.base_project.common.utils.common.PasswordUtils;
 import com.sample.base_project.core.constants.UserStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -72,6 +73,7 @@ public class User implements BaseEntity {
 
     @PrePersist
     public void prePersist() {
+        password = PasswordUtils.encode(password);
         status = UserStatus.ACTIVE.getValue();
     }
 }

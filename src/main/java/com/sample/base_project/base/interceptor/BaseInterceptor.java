@@ -22,7 +22,6 @@ public class BaseInterceptor implements HandlerInterceptor {
 
     static {
         EXCLUDE_PATH_PATTERNS.add("/error/**");
-        EXCLUDE_PATH_PATTERNS.add("/totp/publicTest/**");
     }
 
     @Override

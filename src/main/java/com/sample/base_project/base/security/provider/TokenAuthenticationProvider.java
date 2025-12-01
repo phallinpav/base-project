@@ -1,9 +1,6 @@
 package com.sample.base_project.base.security.provider;
 
-import com.sample.base_project.base.auth.AuthType;
-import com.sample.base_project.base.security.model.AuthModel;
 import com.sample.base_project.base.security.model.AuthenticationToken;
-import com.sample.base_project.base.security.model.DevEndAuth;
 import com.sample.base_project.base.security.model.TokenAuth;
 import com.sample.base_project.base.utils.system.LoginTokenUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -19,13 +16,9 @@ public abstract class TokenAuthenticationProvider implements AuthenticationProvi
     @Autowired
     private LoginTokenUtils loginTokenUtils;
 
-    public abstract AuthenticationToken customAuthenticateToken(com.sample.base_project.base.utils.system.LoginTokenUtils.AuthSession authSession, TokenAuth tokenAuth);
+    public abstract AuthenticationToken customAuthenticateToken(LoginTokenUtils.AuthSession authSession, TokenAuth tokenAuth);
 
     public abstract LoginTokenUtils.SessionType sessionType();
-
-    public AuthenticationToken customDevEndToken(DevEndAuth devEndAuth) {
-        return new AuthenticationToken(new AuthModel(devEndAuth.devAppUuid(), AuthType.DEV_END), devEndAuth.accessKey(), null);
-    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -48,8 +41,6 @@ public abstract class TokenAuthenticationProvider implements AuthenticationProvi
                     log.error(e.getMessage(), e);
                     return new AuthenticationToken("invalid token");
                 }
-            } else if (authentication.getPrincipal() instanceof DevEndAuth devEndAuth) {
-                return customDevEndToken(devEndAuth);
             } else {
                 return new AuthenticationToken("invalid token");
             }

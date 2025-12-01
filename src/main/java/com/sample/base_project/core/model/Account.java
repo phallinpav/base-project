@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -57,6 +58,8 @@ public class Account implements BaseEntity {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
+    @Transient
+    private User user;
 
     @PrePersist
     public void prePersist() {

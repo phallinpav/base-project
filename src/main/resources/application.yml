@@ -4,7 +4,7 @@ spring:
   application:
     name: base-project
   jpa:
-    hibernate.ddl-auto: create
+    hibernate.ddl-auto: update
     generate-ddl: false
     show-sql: false
     properties:

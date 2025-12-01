@@ -1,5 +1,6 @@
 package com.sample.base_project.core.service.impl;
 
+import com.sample.base_project.base.constant.MapKey;
 import com.sample.base_project.common.base.repository.BaseRepository;
 import com.sample.base_project.common.base.service.BaseServiceImpl;
 import com.sample.base_project.common.utils.common.MapEntityUtils;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -30,9 +32,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
     }
 
     @Override
-    protected List<User> mapRef(List<User> entities) {
+    protected List<User> mapRef(List<User> entities, Set<String> mapKeyInclude, Set<String> mapKeyExclude) {
         MapEntityUtils.setMapAllParam(entities,
+                mapKeyInclude,
+                mapKeyExclude,
                 MapEntityUtils.MapParam.ofList(
+                        MapKey.User.ACCOUNT,
                         entities,
                         (userUuids) -> accountService.getList(GetAccountRequest.builder()
                                         .userUuids(userUuids)

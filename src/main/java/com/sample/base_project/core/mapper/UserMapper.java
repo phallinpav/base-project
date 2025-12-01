@@ -1,11 +1,9 @@
 package com.sample.base_project.core.mapper;
 
 import com.sample.base_project.core.constants.UserStatus;
-import com.sample.base_project.core.constants.base.BaseEnum;
 import com.sample.base_project.core.model.User;
 import com.sample.base_project.core.request.CreateUserRequest;
 import com.sample.base_project.core.request.UpdateUserRequest;
-import com.sample.base_project.core.response.UserAccountDto;
 import com.sample.base_project.core.response.UserDto;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;

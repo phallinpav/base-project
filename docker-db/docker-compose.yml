@@ -1,0 +1,84 @@
+services:
+  mysql:
+    image: mysql:8.0.23
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_USER=mysqlUser
+      - MYSQL_PASSWORD=mysqlPassword
+      - MYSQL_DATABASE=accounts
+    command: 
+      - --sql_mode=
+    ports:
+      - 3306:3306
+    volumes:
+      - ~/db_data:/var/lib/mysql
+    networks:
+      - docker-network
+
+  mongo:
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=adminPassword
+      - MONGO_INITDB_DATABASE=admin
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/mongo_data1:/data/db
+    networks:
+      - docker-network
+
+  
+  mongo-express:
+    image: mongo-express:latest
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://admin:adminPassword@mongo:27017/admin?authSource=admin
+
+    depends_on: 
+      - mongo
+    networks:
+      - docker-network
+
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgresUser
+      - POSTGRES_PASSWORD=postgresPass
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/postgres_data:/var/lib/postgresql
+    networks:
+      - docker-network
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - ~/redis_data:/data
+    networks:
+      - docker-network
+
+
+  oracle-db:
+    image: gvenzl/oracle-xe:21-slim
+    container_name: oracle-db
+    ports:
+      - 1521:1521   # Oracle listener port
+      - 5500:5500   # Oracle EM Express port
+    environment:
+      ORACLE_PASSWORD: mysecurepassword   # Set your DB password
+      ORACLE_DATABASE: XE                 # Optional: Database name
+    volumes:
+      - ~/oracle_data:/opt/oracle/oradata   # Persistent storage
+    networks:
+      - docker-network
+
+
+networks:
+  docker-network:
+    driver: bridge

@@ -1,13 +1,11 @@
 package com.sample.base_project.core.request;
 
-import com.sample.base_project.common.base.view.GetBaseOneParam;
+import com.sample.base_project.common.base.view.GetBasePageParam;
 import com.sample.base_project.common.utils.common.StringUtils;
 import com.sample.base_project.common.utils.filter.BaseSpecification;
 import com.sample.base_project.common.utils.filter.SpecificationComposition;
 import com.sample.base_project.common.utils.filter.SpecificationUtils;
 import com.sample.base_project.core.model.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -18,27 +16,32 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
-@AllArgsConstructor
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
-public class GetUserRequest extends GetBaseOneParam<User> {
+public class GetUserPageRequest extends GetBasePageParam<User> {
+
+    private String firstName;
+    private String lastName;
     private String email;
     private String phoneCode;
     private String phoneNum;
 
     @Override
     public SpecificationComposition<User> toSpecCom() {
+        var specCom = super.toSpecCom();
         List<BaseSpecification<User>> list = new ArrayList<>();
 
+        if (StringUtils.isNotBlank(firstName)) {
+            list.add(SpecificationUtils.compareLike("firstName", firstName, true));
+        }
+        if (StringUtils.isNotBlank(lastName)) {
+            list.add(SpecificationUtils.compareLike("lastName", lastName, true));
+        }
         if (StringUtils.isNotBlank(email)) {
-            list.add(SpecificationUtils.compareEqual("email", email));
+            list.add(SpecificationUtils.compareLike("email", email, true));
         }
-        if (StringUtils.isNotBlank(phoneCode)) {
-            list.add(SpecificationUtils.compareEqual("phoneCode", phoneCode));
-        }
-        if (StringUtils.isNotBlank(phoneNum)) {
-            list.add(SpecificationUtils.compareEqual("phoneNum", phoneNum));
-        }
-        return SpecificationComposition.with(list);
+
+        specCom.setOtherSpec(SpecificationComposition.with(list));
+        return specCom;
     }
 }
