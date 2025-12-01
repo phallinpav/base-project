@@ -1,7 +1,7 @@
 package com.sample.base_project.core.controller;
 
 import com.sample.base_project.base.auth.AuthUtils;
-import com.sample.base_project.base.security.annotation.PermissionAuth;
+import com.sample.base_project.common.base.view.GetBaseParam;
 import com.sample.base_project.core.mapper.UserAccountMapper;
 import com.sample.base_project.core.mapper.UserMapper;
 import com.sample.base_project.core.request.UpdateUserRequest;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@PermissionAuth(PermissionAuth.PermissionType.AUTHORITY)
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
@@ -26,7 +25,7 @@ public class UserController {
 
     @GetMapping
     public UserAccountDto getInfo() {
-        return UserAccountMapper.INSTANCE.toDto(service.get(AuthUtils.getAuthUuid()));
+        return UserAccountMapper.INSTANCE.toDto(service.get(GetBaseParam.of(AuthUtils.getAuthUuid(), true)));
     }
 
     @PatchMapping

@@ -43,7 +43,7 @@ public class UserTokenAuthenticationProvider extends TokenAuthenticationProvider
 
         PubAuthContext.setAuth(user);
         PubAuthContext.setToken(tokenAuth.token());
-        return new AuthenticationToken(new AuthModel(1L, AuthType.USER), tokenAuth.token(), authorities);
+        return new AuthenticationToken(new AuthModel(userUuid, AuthType.USER), tokenAuth.token(), authorities);
     }
 
 }
