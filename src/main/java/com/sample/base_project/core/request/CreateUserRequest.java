@@ -1,6 +1,9 @@
 package com.sample.base_project.core.request;
 
 import com.sample.base_project.common.base.view.CreateBaseParam;
+import com.sample.base_project.common.utils.validation.common.AllNullOrNotBlank;
+import com.sample.base_project.common.utils.validation.common.MustHaveAtLeastOne;
+import com.sample.base_project.common.utils.validation.common.MustHaveOnlyOne;
 import com.sample.base_project.common.utils.validation.system.PhoneCode;
 import com.sample.base_project.common.utils.validation.system.PhoneNum;
 import com.sample.base_project.common.utils.validation.system.UserPassword;
@@ -19,6 +22,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@MustHaveAtLeastOne(fields = { "email", "phoneNum" })
+@AllNullOrNotBlank(fields = { "phoneCode", "phoneNum" })
 public class CreateUserRequest extends CreateBaseParam<User> {
 
     @NotBlank

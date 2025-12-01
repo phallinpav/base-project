@@ -12,6 +12,8 @@ public class UserAccountDto {
     private String firstName;
     private String lastName;
     private String email;
+    private String phoneCode;
+    private String phoneNum;
     private EnumDto status;
     private List<AccountDto> accounts;
 }
