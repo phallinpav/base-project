@@ -12,7 +12,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ~/db_data:/var/lib/mysql
+      - ~/mysql_data:/var/lib/mysql
     networks:
       - docker-network
 
@@ -25,7 +25,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ~/mongo_data1:/data/db
+      - ~/mongo_data:/data/db
     networks:
       - docker-network
 
@@ -36,7 +36,6 @@ services:
       - 8081:8081
     environment:
       ME_CONFIG_MONGODB_URL: mongodb://admin:adminPassword@mongo:27017/admin?authSource=admin
-
     depends_on: 
       - mongo
     networks:
@@ -72,7 +71,9 @@ services:
       - 5500:5500   # Oracle EM Express port
     environment:
       ORACLE_PASSWORD: mysecurepassword   # Set your DB password
-      ORACLE_DATABASE: XE                 # Optional: Database name
+      ORACLE_DATABASE: TEST
+      APP_USER: myappuser
+      APP_USER_PASSWORD: mypassword
     volumes:
       - ~/oracle_data:/opt/oracle/oradata   # Persistent storage
     networks:

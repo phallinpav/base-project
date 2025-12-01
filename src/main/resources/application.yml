@@ -4,7 +4,7 @@ spring:
   application:
     name: base-project
   jpa:
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: create
     generate-ddl: false
     show-sql: false
     properties:
@@ -14,9 +14,9 @@ spring:
         dialect: org.hibernate.dialect.OracleDialect
         
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521/XE
-    username: system
-    password: mysecurepassword
+    url: jdbc:oracle:thin:@localhost:1521/TEST
+    username: myappuser
+    password: mypassword
     driver-class-name: oracle.jdbc.OracleDriver
 
   redis:
