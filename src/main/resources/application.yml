@@ -1,8 +1,10 @@
+server:
+  port: 7776
 spring:
   application:
     name: base-project
   jpa:
-    hibernate.ddl-auto: none
+    hibernate.ddl-auto: create
     generate-ddl: false
     show-sql: false
     properties:

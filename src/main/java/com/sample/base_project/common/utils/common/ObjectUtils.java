@@ -2,6 +2,8 @@ package com.sample.base_project.common.utils.common;
 
 import org.hibernate.LazyInitializationException;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.function.Function;
 
 public class ObjectUtils {
@@ -80,6 +82,22 @@ public class ObjectUtils {
             }
         }
         return false;
+    }
+
+    public static boolean isBlank(String value) {
+        return StringUtils.isBlank(value);
+    }
+
+    public static boolean isNotBlank(String value) {
+        return StringUtils.isNotBlank(value);
+    }
+
+    public static boolean isEmpty(Collection<?> collection) {
+        return collection == null || collection.isEmpty();
+    }
+
+    public static boolean isNotEmpty(Collection<?> collection) {
+        return !isEmpty(collection);
     }
 
     public static boolean isNotNull(Object... object) {

@@ -1,5 +1,8 @@
 package com.sample.base_project.common.utils.common;
 
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 public class StringUtils {
 
     public static boolean isBlank(String value) {
@@ -21,6 +24,14 @@ public class StringUtils {
 
     public static boolean isNotBlank(String... value) {
         return !isBlank(value);
+    }
+
+    public static String defaultIfBlank(String value, String defaultValue) {
+        return isBlank(value) ? defaultValue : value;
+    }
+
+    public static String defaultIfBlank(String value, Supplier<String> defaultValue) {
+        return isBlank(value) ? defaultValue.get() : value;
     }
 
     public static String camelCaseToSnakeCase(String val) {

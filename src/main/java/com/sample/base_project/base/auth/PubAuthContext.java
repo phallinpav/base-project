@@ -34,8 +34,8 @@ public class PubAuthContext {
         get().setAuthUuid(authUuid);
     }
 
-    public static Optional<Long> getAuthUuid() {
-        return Optional.ofNullable(get().getAuthUuid()).map(Long::parseLong);
+    public static Optional<String> getAuthUuid() {
+        return Optional.ofNullable(get().getAuthUuid());
     }
 
     public static void setIpAddress(String ipAddress) {

@@ -1,4 +1,4 @@
-package com.sample.base_project.webConfig.provider;
+package com.sample.base_project.core.security.provider;
 
 import com.sample.base_project.base.auth.AuthType;
 import com.sample.base_project.base.auth.PubAuthContext;

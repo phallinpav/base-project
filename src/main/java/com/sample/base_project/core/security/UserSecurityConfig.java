@@ -1,4 +1,4 @@
-package com.sample.base_project.webConfig;
+package com.sample.base_project.core.security;
 
 import com.sample.base_project.base.security.constant.EndpointConstant;
 import com.sample.base_project.base.security.SecurityConfig;

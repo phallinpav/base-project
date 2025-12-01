@@ -1,8 +1,11 @@
 package com.sample.base_project.common.utils.validation.system;
 
 
+import com.sample.base_project.common.utils.validation.common.Password;
 import jakarta.validation.Constraint;
+import jakarta.validation.OverridesAttribute;
 import jakarta.validation.Payload;
+import jakarta.validation.ReportAsSingleViolation;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Size;
 
@@ -13,14 +16,13 @@ import java.lang.annotation.Target;
 
 @Target({ ElementType.FIELD, ElementType.TYPE, ElementType.TYPE_USE })
 @Retention(RetentionPolicy.RUNTIME)
-@Digits(integer = 6, fraction = 0, message = "{must.have.specific.digit}")
-@Size(min = 6, max = 6, message = "{must.have.specific.digit}")
+@Digits(integer = 6, fraction = 0)
+@Size(min = 6, max = 6)
 @Constraint(validatedBy = {})
+@ReportAsSingleViolation
 public @interface VerifyCode {
 
-    /* currently this message, groups, payload here cannot not apply to validation, it will follow whatever validation
-        annotation declare above this class
-     */
+    @OverridesAttribute(constraint = Password.class, name = "message")
     String message() default "";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

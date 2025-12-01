@@ -5,7 +5,7 @@ package com.sample.base_project.base.auth;
 //import com.hound.microinterface.models.postgresql.entity.User;
 
 public class AuthUtils {
-    public static Long getAuthUuid() {
+    public static String getAuthUuid() {
         return PubAuthContext.getAuthUuid().orElse(null);
     }
 //    public static User getUser() {

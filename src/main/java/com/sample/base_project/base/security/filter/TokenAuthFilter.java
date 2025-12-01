@@ -1,10 +1,11 @@
 package com.sample.base_project.base.security.filter;
 
-import com.sample.base_project.Result;
+import com.sample.base_project.core.response.base.Result;
 import com.sample.base_project.common.utils.common.JsonUtils;
 import com.sample.base_project.base.security.model.TokenAuth;
 import com.sample.base_project.base.security.provider.TokenAuthenticationProvider;
 import com.sample.base_project.common.exception.BusinessException;
+import com.sample.base_project.core.response.base.ResultCode;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
@@ -66,7 +67,7 @@ public abstract class TokenAuthFilter extends AbstractPreAuthenticatedProcessing
             httpResponse.setStatus(HttpServletResponse.SC_OK);
             httpResponse.setContentType("application/json");
             httpResponse.setCharacterEncoding("UTF-8");
-            Result<Object> result = Result.error(401, e.getMessage());
+            Result<Object> result = Result.of(ResultCode.UNAUTHORIZE);
             httpResponse.getWriter().write(JsonUtils.toJson(Result.class, result));
         }
     }

@@ -1,8 +1,9 @@
 package com.sample.base_project.base.security.handler;
 
-import com.sample.base_project.Result;
+import com.sample.base_project.core.response.base.Result;
 import com.sample.base_project.base.auth.PubAuthContext;
 import com.sample.base_project.common.utils.common.JsonUtils;
+import com.sample.base_project.core.response.base.ResultCode;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
@@ -20,7 +21,7 @@ public class CustomEntryPoint implements AuthenticationEntryPoint {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        Result<Object> result = Result.error(401, authException.getMessage());
+        Result<Object> result = Result.of(ResultCode.UNAUTHORIZE);
         response.getWriter().write(JsonUtils.toJson(Result.class, result));
         PubAuthContext.remove();
     }

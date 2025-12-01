@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public interface BaseEntity {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    default Long getUuid() {
-        return 0L;
+    default String getUuid() {
+        return null;
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)

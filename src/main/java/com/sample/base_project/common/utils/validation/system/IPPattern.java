@@ -1,7 +1,9 @@
 package com.sample.base_project.common.utils.validation.system;
 
 
+import com.sample.base_project.common.utils.validation.common.Password;
 import jakarta.validation.Constraint;
+import jakarta.validation.OverridesAttribute;
 import jakarta.validation.Payload;
 import jakarta.validation.constraints.Pattern;
 
@@ -12,14 +14,12 @@ import java.lang.annotation.Target;
 
 @Target({ ElementType.FIELD, ElementType.TYPE, ElementType.TYPE_USE })
 @Retention(RetentionPolicy.RUNTIME)
-@Pattern(regexp = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$", message = "{incorrect.ip.format}")
+@Pattern(regexp = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$")
 @Constraint(validatedBy = {})
 public @interface IPPattern {
 
-    /* currently this message, groups, payload here cannot not apply to validation, it will follow whatever validation
-        annotation declare above this class
-     */
-    String message() default "";
+    @OverridesAttribute(constraint = Password.class, name = "message")
+    String message() default "{incorrect.ip.format}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

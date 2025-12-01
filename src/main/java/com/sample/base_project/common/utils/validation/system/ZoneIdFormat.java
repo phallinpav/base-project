@@ -1,7 +1,9 @@
 package com.sample.base_project.common.utils.validation.system;
 
 
+import com.sample.base_project.common.utils.validation.common.Password;
 import jakarta.validation.Constraint;
+import jakarta.validation.OverridesAttribute;
 import jakarta.validation.Payload;
 import jakarta.validation.constraints.Pattern;
 
@@ -16,9 +18,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = {})
 public @interface ZoneIdFormat {
 
-    /* currently this message, groups, payload here cannot not apply to validation, it will follow whatever validation
-        annotation declare above this class
-     */
+    @OverridesAttribute(constraint = Password.class, name = "message")
     String message() default "";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
