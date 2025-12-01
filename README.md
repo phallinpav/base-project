@@ -4,6 +4,8 @@
 - docker-compose up -d --build
   - this will run sample database in docker
 - you can now just run **BaseProjectApplication** as spring application normally
+- **JAVA**: 17
+- **SPRING BOOT**: 3.4.13-SNAPSHOT
 
 ### Note:
 - this sample code is not yet completed, but you can look at some sample code:
